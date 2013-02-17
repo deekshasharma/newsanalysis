@@ -9,6 +9,7 @@
 		<div class="navbar-inner">
 			<a class="brand" href="#">NewsAnalysis</a>
 			<ul class="nav">
+				<li><a href="#myModal" role="button" data-toggle="modal">About</a></li>
 				<li id="delhi" class="active cities"><a href="#">Delhi</a></li>
 				<li id="bangalore" class="cities"><a href="#">Bangalore</a></li>
 				<li id="hyderabad" class="cities"><a href="#">Hyderabad</a></li>
@@ -18,8 +19,21 @@
 		</div>
 	</div>
 	<div id="content" />
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">NewsAnalysis</h3>
+		</div>
+		<div class="modal-body">
+			<p>NewsAnalysis is all about major discussions around the cities in India. Do you want to see what is going on in your city? Have a look!</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+		</div>
+	</div>
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://raw.github.com/jasondavies/d3-cloud/master/d3.layout.cloud.js"></script>
 	<script src="static/js/main.js"></script>
 </body>
