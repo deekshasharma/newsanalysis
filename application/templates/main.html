@@ -9,6 +9,7 @@
 		<div class="navbar-inner">
 			<a class="brand" href="#">NewsAnalysis</a>
 			<ul class="nav">
+				<li><a href="#myModal" role="button" data-toggle="modal">About</a></li>
 				<li id="delhi" class="active cities"><a href="#">Delhi</a></li>
 				<li id="bangalore" class="cities"><a href="#">Bangalore</a></li>
 				<li id="hyderabad" class="cities"><a href="#">Hyderabad</a></li>
@@ -17,10 +18,39 @@
 			</ul>
 		</div>
 	</div>
-	<div id="content" />
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
-	<script type="text/javascript" src="https://raw.github.com/jasondavies/d3-cloud/master/d3.layout.cloud.js"></script>
-	<script src="static/js/main.js"></script>
-</body>
-</html>
+	<div id="content"></div>
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">NewsAnalysis</h3>
+		</div>
+		<div class="modal-body">
+			<p>NewsAnalysis is all about major discussions around the cities in India. Do you want to see what is going on in your city today? Have a look!</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+		</div>
+	</div>
+
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'newsanalysis'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        	dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+        <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://raw.github.com/jasondavies/d3-cloud/master/d3.layout.cloud.js"></script>
+        <script src="static/js/main.js"></script>
+    </body>
+    </html>
