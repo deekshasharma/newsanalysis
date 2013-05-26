@@ -10,6 +10,7 @@ import re
 from pymongo import MongoClient
 from application import app
 from flask import render_template
+from wordlist import ignore_stopwords
 
 
 stopwords = []
@@ -29,7 +30,7 @@ def get_stopwords():
     if stopwords:
         return stopwords
     else:
-        for words in open('/Users/hhimanshu/code/p/python/newsanalysis/application/static/english', 'r').readlines():
+        for words in open('/Users/hhimanshu/IdeaProjects/newsanalysis/application/static/english', 'r').readlines():
             stopwords.append(words.strip())
         return stopwords
         # logging.info("stopwords appended to the list")
@@ -39,9 +40,10 @@ def get_stopwords():
 
 # To get all the headlines for each city
 def get_headlines_from_seedurl(seedurl):
+    logging.info('getting headline from:%s', seedurl)
     urlset = set()
     soup = BeautifulSoup(get_page(seedurl))
-    for divtag in soup.findAll('h2'):
+    for divtag in soup.findAll('h3'):
         try:
             url = divtag.find('a').get('href')
             urlset.add(url)
@@ -63,9 +65,9 @@ def get_news(seedurl):
             try:
                 wordlist = re.split(
                     '\W', (unicodedata.normalize('NFKD', data.find(text=True)).encode('ascii', 'ignore')).lower())
-                news.update([words for words in wordlist if words not in get_stopwords()])
+                news.update([words for words in wordlist if words not in ignore_stopwords])
             except:
-                logging.error('error normalizing: %s' % (data,))
+                logging.error('error normalizing: %s: reason: %s' % (data, repr(sys.exc_info())))
                 continue
     news = {key: value for key, value in news.iteritems() if value >= 9}
     return dict(news)
@@ -90,7 +92,7 @@ def get_final_data():
 
 
 def database_connection():
-    connection = MongoClient()
+    connection = MongoClient('mongodb://news:news@dharma.mongohq.com:10034/news')
     db = connection.news
     collection = db.summary
     return collection
@@ -107,7 +109,8 @@ def save_to_database(summary):
 @app.route('/add', methods=["POST"])
 def driver():
     summary = get_final_data()
-    return save_to_database(summary)
+    save_to_database(summary)
+    return 'OK', 200
     # return render_template('citynewssummary.html',data=summary)
 
 
@@ -120,10 +123,10 @@ def retrieve_from_database(fordate):
 
 @app.route('/get_results', methods=["GET"])
 def what_data():
-    logging.info('get todays data')
     fordate = {"date": datetime.date.today().strftime('%d-%m-%Y')}
     logging.info("searching for dictionary %s" % (fordate, ))
     data = retrieve_from_database(fordate)
+    logging.info('data - %s', data)
     return json.dumps(data)
 
 
