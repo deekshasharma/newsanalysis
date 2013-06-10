@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ `date +%H:%M` == "01:05" ]
+if [ `date +%H:%M` == "15:00" ]
 then
-    sh $OPENSHIFT_DATA_DIR/get_news.sh
+    nohup $OPENSHIFT_DATA_DIR/get_news.sh > $OPENSHIFT_TMP_DIR/logfile 2>&1 &
 fi
