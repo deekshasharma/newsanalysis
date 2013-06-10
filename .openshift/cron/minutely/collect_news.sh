@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [`date +%H:%M` == "00:35"]
+if [`date +%H:%M` == "00:48"]
 then
-    curl -X POST http://newsanalysis-namepsace.rhcloud.com/add
+    sh $OPENSHIFT_DATA_DIR/get_news.sh
 fi
